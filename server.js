@@ -5,7 +5,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var db = require("./models");
+var db = require("./models/index");
 
 // CONFIG //
 // set ejs as view engine
@@ -14,6 +14,12 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 // body parser config to accept our datatypes
 app.use(bodyParser.urlencoded({extended: true}));
+
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/project1' // plug in the db name you've been using
+);
 
 //ROUTES//
 
@@ -27,20 +33,7 @@ app.get('/odds', function(req, res) {
 		{body: "do that"}
 	];
 
-  res.json(oddsFeed);	
+  res.json(oddsFeed);
 });
 
-app.post("/feed", function (req, res){
-  var newDare = req.body;
-
-  // add new food to DB (which, in this case, is an array)
-  _____.push(newFood);
-  // send a response with newly created object
-  res.json(newDare);
-});
-
-
-app.listen(3000, function() {
-  console.log("express-heroku-starter is running on port 3000");
-});
-
+app.listen(process.env.PORT || 3000);

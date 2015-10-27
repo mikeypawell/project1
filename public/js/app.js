@@ -53,7 +53,7 @@ $(document).ready(function(){
 			loser = "tie";
 			$("#tie").html(playerOneName + "tied" + playerTwoName + "and nothing happened.  Play again");
 			$( "#tie" ).show();
-			var outputFive = playerOneName + "tied" + playerTwoName + "and nothing happened.  Play again";
+			var outputFive = playerOneName + " tied " + playerTwoName + " and nothing happened.  Play again!";
 			
 		}
 		
@@ -68,9 +68,8 @@ $(document).ready(function(){
 //on click...save the loser summary to the server...reroute Odds Feed Page 
 var uploadButton = $("#upload");
 uploadButton.click(function() {
-	e.preventDefault();
 	console.log(summary);
-	$.post("/feed", {summary: summary}); 
+	$.post("/feed", {summary: summary});
 
 });
 

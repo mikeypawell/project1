@@ -17,30 +17,55 @@
 </head>
 <body>
 
-  <div id="page-wrapper" class="container">
-    <header class="page-header">
-      <h1>This is the Title</h1>
-    </header>
-    
-    <!-- This is the bs3-form boilerplate: -->
-    <form action="" method="POST" role="form">
-      <legend>Form title</legend>
-    
-      <div class="form-group">
-        <label for="">label</label>
-        <input type="text" class="form-control" id="" placeholder="Input field">
-      </div>
-    </form>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>What Are The Odds?</h1>
+      <p>
+        <a href="/rules"><button class="btn btn-primary btn-lg" id="rules" >Learn How To Play</button></a>
+      </p>
+    </div>
+  </div>
 
-    <ul class="list-group" id="food-ul">
-      <% for(var i=0; i<foods.length; i++) { %>
-        <li class='list-group-item'>
-            <%= foods[i].name %>
-          <span class='label label-default'><%= foods[i].yumminess %></span>
+
+  <!--NAV BAR -->
+  <header class ="navbar"> 
+    <div class="container-fluid">
+      <nav class="navbar navbar-default">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Play The Game</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="public-feed">Odds Feed<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">TBD</a></li>
+          </ul>
         </li>
-      <% } %>  
-    </ul>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</header>
 
+
+  <div>
+    <ul class="list-group">
+      <%allSummaries.reverse()%> 
+      <% for (var i=0; i<allSummaries.length; i++) { %>
+          <li class="list-group-item">
+            <h4 class="list-group-item-heading"><%= allSummaries[i].summary%></h4>
+          </li>
+          <% } %>
+    </ul>
+     
   </div>
 </body>
 </html>

@@ -5,7 +5,9 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var db = require("./models/index");
+//var db = require("./models/index");
+var SummaryModel = require("./models/game");
+
 
 // CONFIG //
 // set ejs as view engine
@@ -15,25 +17,35 @@ app.use(express.static("public"));
 // body parser config to accept our datatypes
 app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect(
-  process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
-  'mongodb://localhost/project1' // plug in the db name you've been using
-);
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/my_heroku_app");
 
 //ROUTES//
 
 app.get('/', function(req, res) {
-  res.render("index");
+	res.render("index");
 });
 
-app.get('/odds', function(req, res) {
-	var oddsFeed =  [
-		{body: "do this"},
-		{body: "do that"}
-	];
+app.get('/public-feed', function(req, res) {
+	SummaryModel.find({},function(err, allSummaries) {
+		console.log(allSummaries);
+		res.render('public-feed', {allSummaries: allSummaries});
+	});
+	
 
-  res.json(oddsFeed);
 });
 
-app.listen(process.env.PORT || 3000);
+app.post('/public-feed', function(req, res) {
+	console.log(req.body);
+	SummaryModel.create({summary: req.body.summary}, function(err, NewSummary) {
+		console.log(NewSummary);	
+		//res.redirect('/public-feed');
+		res.send(NewSummary);
+	});
+
+});
+
+app.listen(3000, function() {
+	console.log("Ready to Rock");
+});
+

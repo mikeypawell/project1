@@ -1,6 +1,6 @@
 {
 
-
+  
   "name": "express-heroku-starter",
   "version": "1.0.0",
   "description": "Starter code for your Express Heroku app",
@@ -28,8 +28,5 @@
     "express"
   ],
   "license": "MIT"
-  
-  "scripts": {
-  "start": "node server.js"
-}
+
 }

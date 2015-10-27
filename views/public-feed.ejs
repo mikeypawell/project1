@@ -30,9 +30,16 @@
         <label for="">label</label>
         <input type="text" class="form-control" id="" placeholder="Input field">
       </div>
-    
-      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <ul class="list-group" id="food-ul">
+      <% for(var i=0; i<foods.length; i++) { %>
+        <li class='list-group-item'>
+            <%= foods[i].name %>
+          <span class='label label-default'><%= foods[i].yumminess %></span>
+        </li>
+      <% } %>  
+    </ul>
 
   </div>
 </body>

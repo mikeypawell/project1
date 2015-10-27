@@ -3,6 +3,7 @@
 $(document).ready(function(){
 	console.log("CLIENT-SIDE JAVASCRIPT IS RUNNING");
  	var playButton = $("#play-the-game");
+ 	var summary = null;
 
 	playButton.click(function() {
 
@@ -19,38 +20,62 @@ $(document).ready(function(){
 		if (playerOneChoice + playerTwoChoice == playerTwoOdds){
 			loser = playerOneName;
 			$("#loserOne").html(playerOneName + " loses to " + playerTwoName + " and has to " + playerOneDare);
+			summary = playerOneName + " loses to " + playerTwoName + " and has to " + playerOneDare;
 			$( "#loserOne" ).show();
+
 		}
 		else if (playerOneChoice == playerTwoChoice) {
 			loser = playerTwoName;
 			$("#loserTwo").html(playerTwoName + " loses to " + playerOneName + " and has to " + playerOneDare);
+			summary = playerTwoName + " loses to " + playerOneName + " and has to " + playerOneDare;
 			$( "#loserTwo" ).show();
-
+			
 		}
 
 		else if (playerTwoOdds == 2 && playerOneChoice == 1 && playerTwoChoice == 2) {
 			loser = $playerOneName;
 			$("#loserOne").html(playerOneName + " loses to " + playerTwoName + " and has to " + playerOneDare);
+			var outputThree = playerOneName + " loses to " + playerTwoName + " and has to " + playerOneDare;
 			$( "#loserOne" ).show();
+		
 
 		}
 
 		else if (playerTwoOdds == 2 && playerOneChoice == 2 && playerTwoChoice == 1) {
 			loser = playerOneName;
 			$("#loserOne").html(playerOneName + " loses to " + playerTwoName + " and has to " + playerOneDare);
+			var outputFour = playerOneName + " loses to " + playerTwoName + " and has to " + playerOneDare;
 			$( "#loserOne" ).show();
+
 
 		}
 		else {
 			loser = "tie";
-			$("#tie").html("Tie Game.  Play Again!");
+			$("#tie").html(playerOneName + "tied" + playerTwoName + "and nothing happened.  Play again");
 			$( "#tie" ).show();
+			var outputFive = playerOneName + "tied" + playerTwoName + "and nothing happened.  Play again";
+			
 		}
 		
 		
 		return loser;
 
 	});
+
+
+
+//Upload to Odds Feed 
+//on click...save the loser summary to the server...reroute Odds Feed Page 
+var uploadButton = $("#upload");
+uploadButton.click(function() {
+	e.preventDefault();
+	console.log(summary);
+	$.post("/feed", {summary: summary}); 
+
+});
+
+
+/*
 //sign-up form
 
 $('#signup-form').on('submit', function(e) {
@@ -79,7 +104,7 @@ $('#signup-form').on('submit', function(e) {
     });
   });
 
-
+*/
 
 
 });

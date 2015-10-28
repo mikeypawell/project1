@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- bootstrap css -->
-  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <title>What Are The Odds</title>
+
+  <!-- STYLESHEETS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
 
+  <!-- VENDOR SCRIPTS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <!-- APPLICATION SCRIPTS -->
   <script src="js/app.js"></script>
 
-  <title>Simple Login</title>
 </head>
 <body>
+  <div class="jumbotron">
+    <div class="rules">
+      <h1>What Are The Odds?</h1>
+      <p>
+        <a href="/rules"><button class="btn btn-primary btn-lg" id="rules" >Learn How To Play</button></a>
+      </p>
+    </div>
+  </div>
+
+  <nav>
+    <ul class="nav nav pills nav-justified" id="navbar">
+      <li><a href="/">Play</a></li>
+      <li><a href="public-feed">Friends Games</a></li>
+      <li><a href="/private-feed">Your Games</a></li>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/sign-up">Sign-Up</a></li>
+    </ul>
+  </nav>
+</div>
+
+
   <div class="container text-center">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">

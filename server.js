@@ -26,13 +26,30 @@ app.get('/', function(req, res) {
 	res.render("index");
 });
 
+app.get('/private-feed', function(req, res) {
+	res.render("private-feed");
+});
+
+app.get('/rules', function(req, res) {
+	res.render("rules");
+});
+
+app.get('/login', function(req, res) {
+	res.render("login");
+});
+
+app.get('/sign-up', function(req, res) {
+	res.render("sign-up");
+});
+
+
+
 app.get('/public-feed', function(req, res) {
 	SummaryModel.find({},function(err, allSummaries) {
 		console.log(allSummaries);
 		res.render('public-feed', {allSummaries: allSummaries});
 	});
 	
-
 });
 
 app.post('/public-feed', function(req, res) {

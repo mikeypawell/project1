@@ -61,8 +61,6 @@ $(document).ready(function(){
 
 	});
 
-
-
 //Upload to Odds Feed 
 //on click...save the loser summary to the server...reroute Odds Feed Page 
 var uploadButton = $("#upload");
@@ -72,9 +70,16 @@ uploadButton.click(function() {
 		{console.log(data);
 		window.location.assign("/public-feed");
 		});
-
-
-
 });
+
+var signupData = $("#signup-form").serialize();
+  console.log(signupData);
+  // send POST request to /users with the form data
+  $.post('/users', signupData, function(response){
+    console.log(response);
+  })
+  
+
+
 
 });

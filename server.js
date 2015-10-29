@@ -41,10 +41,6 @@ app.get('/', function(req, res) {
 	res.render("index");
 });
 
-//Render Play Your Game Feed
-app.get('/private-feed', function(req, res) {
-	res.render("private-feed");
-});
 
 //Render Rules Page
 app.get('/rules', function(req, res) {
@@ -61,38 +57,88 @@ app.get('/sign-up', function(req, res) {
 	res.render("sign-up");
 });
 
-app.get('/logout', function(req, res) {
-	res.render("logout");
+app.get('/not-logged-in', function(req, res) {
+	res.render("not-logged-in");
 });
+
+
+///GET A SINGLE USER BASED ON THEIR EMAIL
+app.get('users/:user_id', function (req, res) {
+	User.findById(req.params.user_id, function(err, User) {
+            if (err)
+                res.send(err);
+            res.json(User);
+});	
+});
+
+//DELETE A SINGLE USER BASED ON THEIR user_id 
+app.delete('users/:user_id', function (req, res) {
+        User.remove({
+            _id: req.params.user_id
+        }, function(err, User) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+});	
+
 //
 app.get('/public-feed', function(req, res) {
 	Summary.find({},function(err, allSummaries) {
-		console.log(allSummaries);
+		//console.log(allSummaries);
 		res.render('public-feed', {allSummaries: allSummaries});
 	});
 	
 });
 
-//
+//POST TO SUMMARIES 
 app.post('/public-feed', function(req, res) {
 	console.log(req.body);
+	console.log(req.session.userId);
 	Summary.create({summary: req.body.summary}, function(err, NewSummary) {
 		console.log(NewSummary);	
 		//res.redirect('/public-feed');
+		if (req.session.userId !== null) {
+			User.findOne({_id: req.session.userId}, function (err, currentUser) {
+			currentUser.games.push(NewSummary);
+			currentUser.save();
+				console.log("currentUser", currentUser);
+
+
+			});
+		}
 		res.send(NewSummary);
 	});
+});
+
+//THIS IS POPULATING ALL GAMES.  I NEED SPECIFIC USER GAMES.
+
+app.get('/private-feed', function(req, res) {
+	User.findOne({_id: req.session.userId})
+		.populate('games')
+		.exec(function(err, currentUser) {
+		console.log("these are the games", currentUser);
+		res.render('private-feed', {currentUser: currentUser});
+	});
+
+	if (req.session.userId === null ||req.session.user === null) {
+		res.redirect('/logout');
+	}
 
 });
+
 
 // A create user route - creates a new user with a secure password
 app.post('/users', function (req, res) {
   //console.log(req.body);
   User.createSecure(req.body.email, req.body.password, function (err, newUser) {
     req.session.userId = newUser._id;
-    console.log(newUser);
+    //console.log(newUser);
     res.redirect('/profile');
   });
 });
+
 
 app.post('/sessions', function (req, res) {
   // call authenticate function to check if password user entered is correct
@@ -101,7 +147,7 @@ app.post('/sessions', function (req, res) {
       console.log('authentication error: ', err);
       res.status(500).send();
     } else {
-      console.log('setting sesstion user id ', loggedInUser._id);
+      console.log('setting session user id ', loggedInUser._id);
       req.session.userId = loggedInUser._id;
       res.redirect('/profile');
     }
@@ -114,7 +160,10 @@ app.get('/profile', function (req, res) {
   User.findOne({_id: req.session.userId}, function (err, currentUser) {
     if (err){
       console.log('database error: ', err);
-      res.redirect('/login');
+      res.redirect('/logout');
+
+    } else if (req.session.userId === null) {
+    	res.redirect('/logout');
     } else {
       // render profile template with user's data
       console.log('loading profile of logged in user');
@@ -126,10 +175,8 @@ app.get('/profile', function (req, res) {
 app.get('/logout', function (req, res) {
   // remove the session user id
   req.session.userId = null;
-  // redirect to login (for now)
-  res.redirect('/login');
+  res.redirect('not-logged-in');
 });
-
 
 
 app.listen(3000, function() {

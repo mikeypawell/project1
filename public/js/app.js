@@ -72,6 +72,30 @@ uploadButton.click(function() {
 	});
 });
 
+var logoutButton = $('#logout');
+logoutButton.click(function() {
+	e.preventDefault();
+
+	$.get("/logout", function(data) {
+		console.log(data.msg);
+	});
+});
+
+// var loginButton = $('#login-form');
+// loginButton.on("submit", function(e) {
+// 	e.preventDefault();
+// 	$.post("/sessions", function(data) {
+// 		$.ajax({
+// 			method: "POST",
+// 			url: "/sessions",
+// 			success: function() {
+// 				window.location.assign("/profile");
+// 			}
+// 		});
+// 	});
+// });
+
+});
 
 // $('#signup-form').on('submit', function(e) {
 //     e.preventDefault();
@@ -90,4 +114,7 @@ uploadButton.click(function() {
   //   });
   // });
 
-});
+	
+
+
+

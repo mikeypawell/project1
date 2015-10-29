@@ -10,7 +10,8 @@ var Schema = mongoose.Schema;
 //USER SCHEMA
 var userSchema = new Schema({
   email: String,
-  passwordDigest: String
+  passwordDigest: String,
+  games: [{ type: Schema.Types.ObjectId, ref: 'Summary' }] 
 });
 
 

@@ -43,11 +43,14 @@
 
 <div>
   <ul class="list-group">
+    <% for (var i=0; i<currentUser.games.length; i++) { %>
     <li class="list-group-item">
-      <h4 class="list-group-item-heading"></h4>
+      <h4 class="list-group-item-heading"><%= currentUser.games[i].summary%></h4>
     </li>
+    <% } %>
   </ul>
-</div>  
+
+</div> 
 </body>
 </html>
 

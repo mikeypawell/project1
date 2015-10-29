@@ -17,6 +17,10 @@
   <!-- APPLICATION SCRIPTS -->
   <script src="js/app.js"></script>
 
+  <!-- jQuery Validate -->
+  <script src="node_modules/jquery-validation/dist/jquery.validate.js"></script>
+
+
 </head>
 <body>
   <div class="jumbotron">
@@ -40,9 +44,7 @@
   </nav>
 </div>
 
-
-<div class = "all-inputs"> 
-
+<form class = "all-inputs" id= "game-form" required> 
   <!--Player 1 Name Input -->
   <div class = "row">
 
@@ -51,11 +53,10 @@
       </h2>
     </div>
 
-
     <div class="col-sm-12">
       <div class="input-group input-group-lg">
         <span class="input-group-one" ></span>
-        <input type="text"id="player-one-input" class="form-control" placeholder="Player 1 Name">
+        <input type="text"id="player-one-input" minLength = "2" class="form-control " placeholder="Player 1 Name" required>
       </div>
 
       <div class="col-sm-12" id = "inputs">
@@ -175,6 +176,7 @@
                   <button type="button" class="btn btn-default">Upload to Odds Feed</button>
                 </div>
               </div>
+              </form>
 
             </body>
             </html>

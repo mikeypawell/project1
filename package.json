@@ -1,6 +1,4 @@
 {
-
-  
   "name": "express-heroku-starter",
   "version": "1.0.0",
   "description": "Starter code for your Express Heroku app",
@@ -9,6 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
@@ -28,5 +27,4 @@
     "express"
   ],
   "license": "MIT"
-
 }

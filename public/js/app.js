@@ -69,17 +69,25 @@ uploadButton.click(function() {
 	$.post("/public-feed", {summary: summary}, function(data)
 		{console.log(data);
 		window.location.assign("/public-feed");
-		});
+	});
 });
 
-var signupData = $("#signup-form").serialize();
-  console.log(signupData);
-  // send POST request to /users with the form data
-  $.post('/users', signupData, function(response){
-    console.log(response);
-  })
-  
 
+// $('#signup-form').on('submit', function(e) {
+//     e.preventDefault();
+//     var signupData = $("#signup-form").serialize();
+//     	console.log(signupData);
+//     $.post('/users', signupData, function(response) {
+//       	console.log(response);
+//     });
+//   });
 
+  // $('#login-form').on('submit', function(e) {
+  //   e.preventDefault();
+  //   var loginData = $(this).serialize();
+  //   $.post('/login', loginData, function(response) {
+  //     console.log(response);
+  //   });
+  // });
 
 });

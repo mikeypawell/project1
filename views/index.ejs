@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
 
+ <link href='https://fonts.googleapis.com/css?family=Hind:400,500,300,600' rel='stylesheet' type='text/css'>
+
   <!-- VENDOR SCRIPTS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -26,7 +28,9 @@
   <div class="jumbotron">
     <div class="container">
       <a href="/logout"><button class="btn btn-primary btn-md" id="logout-button" >Logout</button></a>
+      <div class="header-font">
       <h1>What Are The Odds?</h1>
+      </div>
       <p>
         <a href="/rules"><button class="btn btn-primary btn-lg" id="rules" >Learn How To Play</button></a>
       </p>
@@ -56,7 +60,7 @@
     <div class="col-sm-12">
       <div class="input-group input-group-lg">
         <span class="input-group-one" ></span>
-        <input type="text"id="player-one-input" minLength = "2" class="form-control " placeholder="Player 1 Name" required>
+        <input type="text"id="player-one-input" class="form-control " placeholder="Player 1 Name" required>
       </div>
 
       <div class="col-sm-12" id = "inputs">
@@ -159,21 +163,11 @@
                   </div>
                 </div>
 
-                <!--FILE UPLOAD-->
-                <div class="col-sm-offset-2 col-sm-8 col-sm-offset-2">
-                  <div class="form-group">
-                    <p class="help-block">Upload a photo to embaress the loser.</p>
-                    <label for="exampleInputFile"></label>
-                    <input type="file" id="exampleInputFile">
-                  </div>
-                </div>
-              </div>
-
 
               <!--Upload to Odds Feed BUTTON -->
               <div class="col-sm-12">
-                <div class="btn-group btn-group-lg" role="group" id="upload" aria-label="...">
-                  <button type="button" class="btn btn-default">Upload to Odds Feed</button>
+                <div class="btn-group btn-group-lg" role="group"  aria-label="...">
+                  <button type="button" id="upload" class="btn btn-default">Upload to Odds Feed</button>
                 </div>
               </div>
               </form>

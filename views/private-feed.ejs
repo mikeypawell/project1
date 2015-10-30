@@ -41,16 +41,20 @@
   </nav>
 </div>
 
-<div>
-  <ul class="list-group">
-    <% for (var i=0; i<currentUser.games.length; i++) { %>
-    <li class="list-group-item">
-      <h4 class="list-group-item-heading"><%= currentUser.games[i].summary%></h4>
-    </li>
-    <% } %>
-  </ul>
+<div class = "row">
+<div class="col-sm-offset-2 col-sm-8 col-sm-offset-2">
+  <div>
+    <ul class="list-group">
+      <% for (var i=0; i<currentUser.games.length; i++) { %>
+      <li class="list-group-item" id="private-dares">
+        <h4 class="list-group-item-heading"><%= currentUser.games[i].summary%></h4>
+      </li>
+      <% } %>
+    </ul>
+  </div> 
+</div>
+</div>
 
-</div> 
 </body>
 </html>
 

@@ -5,7 +5,6 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-//var db = require("./models/index");
 var Summary = require("./models/game");
 var User = require("./models/user");
 var session = require('express-session');
@@ -28,7 +27,7 @@ app.use(session({
   saveUninitialized: true,
   resave: true,
   secret: 'SuperSecretCookie',
-  cookie: { maxAge: 30 * 60 * 1000 }
+  cookie: { maxAge: 100 * 100 * 1000 }
 }));
 
 
@@ -81,7 +80,6 @@ app.delete('users/:user_id', function (req, res) {
         });
 });	
 
-//
 app.get('/public-feed', function(req, res) {
 	Summary.find({},function(err, allSummaries) {
 		//console.log(allSummaries);

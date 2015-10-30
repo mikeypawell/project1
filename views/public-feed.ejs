@@ -41,16 +41,20 @@
   </nav>
 </div>
 
-<div>
-  <ul class="list-group">
-    <%allSummaries.reverse()%> 
-    <% for (var i=0; i<allSummaries.length; i++) { %>
-    <li class="list-group-item">
-      <h4 class="list-group-item-heading"><%= allSummaries[i].summary%></h4>
-    </li>
-    <% } %>
-  </ul>
 
+<div class = "row">
+<div class="col-sm-offset-2 col-sm-8 col-sm-offset-2">
+  <div>
+    <ul class="list-group">
+      <%allSummaries.reverse()%> 
+      <% for (var i=0; i<allSummaries.length; i++) { %>
+      <li class="list-group-item" id="public-dares">
+        <h4 class="list-group-item-heading"><%= allSummaries[i].summary%></h4>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+</div>
 </div>
 </body>
 </html>

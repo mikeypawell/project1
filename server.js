@@ -19,9 +19,6 @@ app.use(express.static("public"));
 // body parser config to accept our datatypes
 app.use(bodyParser.urlencoded({extended: true}));
 
-var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/my_heroku_app");
-
 // Middleware
 app.use(express.static('public'));
 app.set('view engine', 'ejs');

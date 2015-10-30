@@ -1,4 +1,3 @@
-var mongoose = require("mongoose");
 
 // require dependencies
 var mongoose = require('mongoose'),

@@ -9,6 +9,7 @@ var mongoose = require("mongoose");
 var Summary = require("./models/game");
 var User = require("./models/user");
 var session = require('express-session');
+var db = require('./models/index.js');
 
 
 // CONFIG //
@@ -128,10 +129,10 @@ app.get('/private-feed', function(req, res) {
 
 // A create user route - creates a new user with a secure password
 app.post('/users', function (req, res) {
-  //console.log(req.body);
+  console.log(req.body);
   User.createSecure(req.body.email, req.body.password, function (err, newUser) {
     req.session.userId = newUser._id;
-    //console.log(newUser);
+    console.log(newUser);
     res.redirect('/profile');
   });
 });

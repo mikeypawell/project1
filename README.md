@@ -1,119 +1,43 @@
-## Getting set up on Heroku with Node + Mongoose
 
-### Before you do anything
-1) Let's remove the link to the repo we cloned and commit the starting point of our project in a local git repo. We can check the location of the remote repository by typing: `git remote -v`. In order to remove the link to the class repo, type: `git remote remove origin`. You can confirm this was successful with the first command.
+Description 
 
-If so, your app is still under version control with `git` but it only has a local repository. You can run `git status` to make sure. If not, just type `git init` to make it into one again. __Stop and commit your changes.__
+What Are The Odds is a simple game intended to make your friends do stupid things.  There are no winners, just losers.  The problem with the game is that there is no good way to document the games you have played and all the ridiculous things that you have gotten your friends to do, or done yourself.  To fill this much needed gap I created the What Are The odds web application where you can track all your past games.  
 
-2) Sign up for an account with heroku: https://www.heroku.com/
+If you aren’t familiar with the game…
 
-3) Install the heroku toolbelt - [https://toolbelt.heroku.com/](https://toolbelt.heroku.com/)
+Start by thinking of a challenge or dare you would like to see you friends do.  Once you have something particularly funny or cruel ask your friend “What are the odds you do….(the challenge).  The person dared than has to respond with odds between 1 and 50.  Ex. 1/50, 1/25, 1/10.  Now each player “secretly” picks a number between 1 and x and plug it in to the web application.   Hit play and the computer will decide your fate.  If the numbers are the same the, the person dared has to complete the dare.  If the numbers are different than nothing happens....unless both number add up to the odds chosen. Then the person that asked the dare has to complete the challenge.
 
-**(NOTE YOUR PROJECT MUST BE A GIT REPO TO CONTINUE.)**.
+There is one special rule.  If the odds chosen are 1/2 than it is guaranteed that one person will have to complete the dare. If the numbers chosen are the same the dare has to do it. If the numbers chosen are different than the darer has to complete the dare.
+  
+Example Game 
 
-### Heroku Setup
+Here is an example to inspire the mischief.  Mikey asks John, “What are the Odds you eat that whole box of donuts?”  John responds back 1 in 10.  Mikey inputs the number 4.  John inputs the number 4.  The computer spits back…”John lost (because the numbers are the same) and has to eat that whole box of donuts.”
 
-4) Add a new remote to your project that points to Heroku's servers:
+Heroku
 
-```bash
-    heroku create
-    //OR
-    heroku create YOUR_APP_NAME
-```
+https://what-are-the-odds.herokuapp.com/ 
 
-5) In your `server.js` file, modify `app.listen` to use `process.env.PORT` (this will be set, dynamically, by Heroku):
+Trello Board
 
-```javascript
-    app.listen(process.env.PORT || 3000)
-```
+https://trello.com/b/Zq4rCH43/whataretheodds  (includes user stories) 
 
-6) Tell heroku to use the mongolab addon. In your terminal, run:
 
-```bash
-    heroku addons:create mongolab
-```
+No external APIs were used
 
-7) At this point, the command line may ask you to enter a credit card number. Heroku charges for some services, or if you go over some data limits. With the tools we're using and the size of our projects' data, everything should be free.  If you had to enter in a credit card, run the `heroku addons:create mongolab` command again. __You may need to wait a few minutes for mogolab to become active.__
+Libraries and Templates Used
+	-Jquery
+	-EJS
+	-Bootstrap
 
-8) Update your database connection to point to Heroku's database. Open `models/index.js` and add the following to the `mongoose.connect` method:
+Wish List
+Eventually I would love to make What Are The Odds into a native mobile application to allow for people to play the game remotely, and to incorporate easy photo/video upload. 
 
-```javascript
-    mongoose.connect( process.env.MONGOLAB_URI ||
-                      process.env.MONGOHQ_URL || 
-                      "YOUR OWN LOCAL URL HERE" )
-```
-
-Congrats! Your application knows what port to run on, and what database to connect to - you're almost all set up to work in "production" on Heroku's servers!
-
-### Confirm your Dependencies
-
-9) Double check your `package.json` to make sure that all your depenedencies are present. If something is missing install it.
-
-Here are some common dependencies:  
-``` javascript
-    {
-      "dependencies": {
-        "body-parser": "^1.14.1",
-        "ejs": "^2.3.4",
-        "express": "^4.13.3",
-        "express-session": "^1.11.3",
-        "mongoose": "^4.1.5"
-      }
-    }
-```
-
-For example, if you're using body-parser but don't have it listed in your package.json `dependencies`, run the following:
-
-```bash
-    npm install body-parser --save
-```
-
-### Check the start script
-10) Check a `start` script for your application in your `package.json`:
-
-```javascript
-...
-  "scripts": {
-    "start": "node server.js"
-   }
-...
-```
-
-This is assuming your main application file is called `server.js`. If your main file is called something else, adjust the script to use your file name.
-
-### Check the Procfile
-11) Notice we have a `Procfile` so that Heroku knows how to run your application. If you do not have a Procfile, create one:
-    - Make sure you are in your main project directory (the same directory as `server.js`). Then run:  
-``` bash
-    touch Procfile
-    echo "web: node server.js" >> Procfile
-```
-
-### Deploy!
-12) Stop and commit. We've made a lot of changes!
-``` bash
-    git add . -A
-    git commit -m "ready for heroku deploy attempt #1"
-```
-
-13) Now we can deploy:
-``` bash
-    git push heroku master
-```
-
-If you missed a step just ask for help. Otherwise you should be able to visit your application by saying the following:
-
-```bash
-    heroku open
-```
-
-## Debugging Tips
-
-Here are some helpful commands for debugging your application on Heroku:
-
-#### `heroku logs`
-This command lists your most recent application server logs. Helpful for figuring out why your application may be crashing and burning.
-
-#### `heroku run bash`
-This command allows you to run terminal _on Heroku's servers_. This is a handy way for us to poke around and run commands on our application (like seeding the database, and checking that everything was installed correctly).
-# project1
+Some features I did not get around to, but wanted to add are.
+	-photo/video upload
+	-commenting and liking
+	-data validation for all the forms
+	-time stamps
+	-the ability for users to play the game on different computers/phones
+		-so saving inputs to the server
+	-more custom styling
+	-a logo

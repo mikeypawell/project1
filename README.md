@@ -17,6 +17,11 @@ Heroku
 
 https://what-are-the-odds.herokuapp.com/ 
 
+Trello Board
+
+https://trello.com/b/Zq4rCH43/whataretheodds  (includes user stories) 
+
+
 No external APIs were used
 
 Libraries and Templates Used

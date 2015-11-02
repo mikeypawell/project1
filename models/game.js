@@ -6,6 +6,10 @@ var Schema = mongoose.Schema;
 
 var SummarySchema = new Schema({
     summary: String,
+    timeStamp : {
+      type : Date,
+      default: Date.now
+    },
 
 });
 

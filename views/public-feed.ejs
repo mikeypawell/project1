@@ -50,6 +50,7 @@
       <% for (var i=0; i<allSummaries.length; i++) { %>
       <li class="list-group-item" id="public-dares">
         <h4 class="list-group-item-heading"><%= allSummaries[i].summary%></h4>
+        <p><i><%= moment(allSummaries[i].timeStamp).fromNow() %></i></p>
       </li>
       <% } %>
     </ul>

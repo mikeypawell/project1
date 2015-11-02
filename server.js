@@ -9,6 +9,7 @@ var Summary = require("./models/game");
 var User = require("./models/user");
 var session = require('express-session');
 var db = require('./models/index.js');
+var moment = require('moment');
 
 
 // CONFIG //
@@ -83,23 +84,23 @@ app.delete('users/:user_id', function (req, res) {
 app.get('/public-feed', function(req, res) {
 	Summary.find({},function(err, allSummaries) {
 		//console.log(allSummaries);
-		res.render('public-feed', {allSummaries: allSummaries});
+		res.render('public-feed', {allSummaries: allSummaries, moment: moment});
 	});
 	
 });
 
+
 //POST TO SUMMARIES 
 app.post('/public-feed', function(req, res) {
-	console.log(req.body);
-	console.log(req.session.userId);
+	console.log("public feed session id: " + req.session.userId);
 	Summary.create({summary: req.body.summary}, function(err, NewSummary) {
-		console.log(NewSummary);	
+		console.log("public feed NewSummary: " + NewSummary);	
 		//res.redirect('/public-feed');
 		if (req.session.userId !== null) {
 			User.findOne({_id: req.session.userId}, function (err, currentUser) {
 			currentUser.games.push(NewSummary);
 			currentUser.save();
-				console.log("currentUser", currentUser);
+				console.log("public feed currentUser", currentUser);
 
 
 			});
@@ -114,8 +115,8 @@ app.get('/private-feed', function(req, res) {
 	User.findOne({_id: req.session.userId})
 		.populate('games')
 		.exec(function(err, currentUser) {
-		console.log("these are the games", currentUser);
-		res.render('private-feed', {currentUser: currentUser});
+		console.log("private feed these are the games", currentUser);
+		res.render('private-feed', {currentUser: currentUser, moment: moment});
 	});
 
 	if (req.session.userId === null ||req.session.user === null) {
@@ -127,10 +128,9 @@ app.get('/private-feed', function(req, res) {
 
 // A create user route - creates a new user with a secure password
 app.post('/users', function (req, res) {
-  console.log(req.body);
   User.createSecure(req.body.email, req.body.password, function (err, newUser) {
     req.session.userId = newUser._id;
-    console.log(newUser);
+    console.log("newUser:" + newUser);
     res.redirect('/profile');
   });
 });
@@ -162,7 +162,6 @@ app.get('/profile', function (req, res) {
     	res.redirect('/logout');
     } else {
       // render profile template with user's data
-      console.log('loading profile of logged in user');
       res.render('profile', {user: currentUser});
     }
   });
